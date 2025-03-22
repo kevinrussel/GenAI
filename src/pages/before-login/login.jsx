@@ -1,7 +1,9 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function SignupLogin() {
   const [isSignUp, setIsSignUp] = useState(false);
+  const navigate = useNavigate();
 
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-100">
@@ -71,7 +73,12 @@ export default function SignupLogin() {
             </div>
           )}
 
-          <button className="w-full bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600">
+          <button 
+          onClick={(e) => {
+              e.preventDefault(); 
+                navigate("/startup");
+            }}
+            className="w-full bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600">
             {isSignUp ? "Sign Up" : "Login"}
           </button>
         </form>
