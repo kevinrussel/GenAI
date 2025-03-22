@@ -19,12 +19,12 @@ const CameraCapture = () => {
 
   const sendImage = async (image) => {
     try {
-      const response = await fetch("na", {
+      const response = await fetch("http://localhost:5000/upload", {
         method: "POST",
         body: JSON.stringify({ image }),
         headers: { "Content-Type": "application/json" },
       });
-
+  
       const data = await response.json();
       console.log("Image uploaded:", data);
     } catch (error) {
@@ -72,7 +72,7 @@ const CameraCapture = () => {
           className="w-full flex justify-between items-center text-white text-lg"
         >
           <span>Menu</span>
-          <span className="text-xl">{isMenuOpen ? "↑" : "↓"}</span>
+          <span className="text-xl">{isMenuOpen ? "↓" : "↑"}</span>
         </button>
 
         {/* CONTENT INSIDE THE DROP MENU THINGY */}

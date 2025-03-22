@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Navbar from './components/navbar';
 import { BrowserRouter as Router, useRoutes} from 'react-router-dom';
 
-import AboutPage from './pages/before-login/contact.js';
+import AboutPage from './pages/before-login/aboutpage.jsx';
 import Homepage from './pages/before-login/home.jsx';
 import Login from './pages/before-login/login.jsx';
 import Startup from './pages/after-login/startup.jsx';
@@ -10,7 +10,7 @@ import Startup from './pages/after-login/startup.jsx';
 const RoutesConfig = () => {
     return useRoutes([
         { path: "/", element: <Homepage /> },
-        { path: "/about", element: <AboutPage /> },
+        { path: "/aboutpage", element: <AboutPage /> },
         {path : "/login", element: <Login/>},
         {path:"/startup", element: <Startup />}
     ]);

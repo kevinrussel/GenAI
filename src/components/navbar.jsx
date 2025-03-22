@@ -15,7 +15,7 @@ export default function Navbar({ isLoggedIn, setIsLoggedIn }) {
           {/* Center Navigation Links */}
           <div className="hidden md:flex flex-grow justify-center space-x-6">
             <Link to="/" className="hover:text-gray-400">Home</Link>
-            <Link to="/contact" className="hover:text-gray-400">Contact</Link>
+            <Link to="/aboutpage" className="hover:text-gray-400">Contact</Link>
             {isLoggedIn && (
               <Link to="/dashboard" className="hover:text-gray-400">Dashboard</Link>
             )}
