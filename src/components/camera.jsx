@@ -4,11 +4,15 @@ import Webcam from "react-webcam";
 const CameraCapture = () => {
   const webcamRef = useRef(null);
   const [capturedImages, setCapturedImages] = useState([]);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const captureImage = () => {
     if (webcamRef.current) {
       const imageSrc = webcamRef.current.getScreenshot();
-      setCapturedImages((prev) => [...prev.slice(-5), imageSrc]); 
+      setCapturedImages((prev) => {
+        const updatedImages = [imageSrc, ...prev];
+        return updatedImages.slice(0, 9);
+      });
       sendImage(imageSrc);
     }
   };
@@ -37,27 +41,56 @@ const CameraCapture = () => {
   }, []);
 
   return (
-    <div className="flex flex-col items-center bg-gray-900 min-h-screen text-white py-10">
-      <div className="border-4 border-blue-500 rounded-lg shadow-lg">
+    <div className="flex flex-col items-center bg-gray-900 min-h-screen text-white py-10 relative">
+      {/* CAMERA THAT FINALLY WORKS */}
+      <div
+        className={`transition-all duration-500 ease-in-out ${
+          isMenuOpen ? "w-24 h-24 absolute top-4 right-4" : "w-full"
+        }`}
+        style={{
+          top: isMenuOpen ? "auto" : "10rem",
+          transform: isMenuOpen ? "translateY(0)" : "translateY(0)",
+        }}
+      >
         <Webcam
           ref={webcamRef}
           screenshotFormat="image/jpeg"
-          className="rounded-lg w-96"
+          className={`w-full ${
+            isMenuOpen ? "h-24" : "h-[calc(100vh-10rem)]"
+          } object-cover rounded-lg transition-all duration-500`}
         />
       </div>
 
-      <div className="mt-6 text-center">
-        <h2 className="text-lg font-semibold">Last Captured Images</h2>
-        <div className="grid grid-cols-3 gap-3 mt-3">
-          {capturedImages.map((img, index) => (
-            <img
-              key={index}
-              src={img}
-              alt={`Capture ${index}`}
-              className="w-24 h-24 rounded-md border-2 border-gray-300 shadow"
-            />
-          ))}
-        </div>
+      {/* DROP DOWN MENU  */}
+      <div
+        className={`transition-all duration-500 ${
+          isMenuOpen ? "h-[70%]" : "h-20"
+        } w-full bg-gray-800 p-4 rounded-t-xl absolute bottom-0 left-0`}
+      >
+        <button
+          onClick={() => setIsMenuOpen((prev) => !prev)}
+          className="w-full flex justify-between items-center text-white text-lg"
+        >
+          <span>Menu</span>
+          <span className="text-xl">{isMenuOpen ? "↑" : "↓"}</span>
+        </button>
+        
+        {/* DROP DOWN MENU CONTENT*/}
+        {isMenuOpen && (
+          <div className="mt-4 text-white">
+            <h2 className="text-lg font-semibold">Last Captured Images</h2>
+            <div className="grid grid-cols-3 gap-3 mt-3">
+              {capturedImages.map((img, index) => (
+                <img
+                  key={index}
+                  src={img}
+                  alt={`Capture ${index}`}
+                  className="w-24 h-24 rounded-md border-2 border-gray-300 shadow"
+                />
+              ))}
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
