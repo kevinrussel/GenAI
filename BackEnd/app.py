@@ -5,7 +5,6 @@ import pymongo
 from dotenv import load_dotenv
 import os
 
-# Load environment variables
 load_dotenv()
 
 app = Flask(__name__)

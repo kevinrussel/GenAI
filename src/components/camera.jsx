@@ -10,7 +10,8 @@ const CameraCapture = () => {
     if (webcamRef.current) {
       const imageSrc = webcamRef.current.getScreenshot();
       setCapturedImages((prev) => {
-        const updatedImages = [imageSrc, ...prev];
+        const timestamp = new Date().toISOString();
+        const updatedImages = [{ imageSrc, timestamp }, ...prev];
         return updatedImages.slice(0, 9);
       });
       sendImage(imageSrc);
