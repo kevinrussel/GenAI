@@ -1,44 +1,39 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
-from pymongo import MongoClient
 import base64
+import pymongo
+from dotenv import load_dotenv
 import os
-from config import MONGO_URI
+
+# Load environment variables
+load_dotenv()
 
 app = Flask(__name__)
-CORS(app)  # Enable Cross-Origin Requests
+CORS(app)  # Allow frontend to connect
 
-# Connect to MongoDB
-client = MongoClient(MONGO_URI)
-db = client["image_db"]
+# MongoDB Setup
+print("Connecting to MongoDB...", os.getenv("MONGO_URI"))
+client = pymongo.MongoClient(os.getenv("MONGO_URI"))
+db = client["image_database"]
 collection = db["images"]
+print("Connected to MongoDB!")
 
 @app.route("/upload", methods=["POST"])
 def upload_image():
     try:
-        data = request.json
+        data = request.json  # Get JSON data from frontend
         image_data = data.get("image")
 
         if not image_data:
             return jsonify({"error": "No image provided"}), 400
 
-        collection.insert_one({"image": image_data})
-        return jsonify({"message": "Image uploaded successfully"}), 201
+        # Store in MongoDB
+        image_doc = {"image": image_data}
+        collection.insert_one(image_doc)
 
-    except Exception as e:
-        return jsonify({"error": str(e)}), 500
-
-@app.route("/latest", methods=["GET"])
-def get_latest_image():
-    try:
-        image_doc = collection.find_one({}, sort=[("_id", -1)])
-        if not image_doc:
-            return jsonify({"error": "No images found"}), 404
-        
-        return jsonify({"image": image_doc["image"]})
-
+        return jsonify({"message": "Image uploaded successfully!"}), 200
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
 if __name__ == "__main__":
-    app.run(debug=True, port=5000)
+    app.run(debug=True)
