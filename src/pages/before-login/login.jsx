@@ -1,27 +1,23 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-export default function SignupLogin() {
+function SignupLogin() {
   const [isSignUp, setIsSignUp] = useState(false);
   const navigate = useNavigate();
 
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-100">
       <div className="bg-white shadow-md rounded-lg p-6 w-96">
-       
+        
         <div className="flex justify-around border-b mb-4">
           <button
-            className={`pb-2 text-lg font-medium ${
-              !isSignUp ? "border-b-2 border-blue-500 text-blue-500" : "text-gray-500"
-            }`}
+            className={`pb-2 text-lg font-medium ${!isSignUp ? "border-b-2 border-blue-500 text-blue-500" : "text-gray-500"}`}
             onClick={() => setIsSignUp(false)}
           >
             Login
           </button>
           <button
-            className={`pb-2 text-lg font-medium ${
-              isSignUp ? "border-b-2 border-blue-500 text-blue-500" : "text-gray-500"
-            }`}
+            className={`pb-2 text-lg font-medium ${isSignUp ? "border-b-2 border-blue-500 text-blue-500" : "text-gray-500"}`}
             onClick={() => setIsSignUp(true)}
           >
             Sign Up
@@ -74,17 +70,18 @@ export default function SignupLogin() {
           )}
 
           <button 
-          onClick={(e) => {
+            onClick={(e) => {
               e.preventDefault(); 
-                navigate("/startup");
+              navigate("/startup");
             }}
-            className="w-full bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600">
+            className="w-full bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600"
+          >
             {isSignUp ? "Sign Up" : "Login"}
           </button>
         </form>
 
         <div className="text-center mt-4 text-sm text-gray-600">
-          {isSignUp ? "Already have an account?" : "Don't have an account?"}{" "}
+          {isSignUp ? "Already have an account?" : "Don't have an account?"} {" "}
           <button
             onClick={() => setIsSignUp(!isSignUp)}
             className="text-blue-500 font-medium hover:underline"
@@ -96,3 +93,5 @@ export default function SignupLogin() {
     </div>
   );
 }
+
+export default SignupLogin;
