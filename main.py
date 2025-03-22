@@ -1,13 +1,19 @@
 from RestingAi import *
+from flask import Flask,request,jsonify
 
-def main():
-    ## this is creating the face object.
-    var1 =  RestingAi()
-    var1.hi()
-    
-    
-    return 0
+app = Flask(__name__)
+
+var1 = RestingAi()
+
+@app.route('/data',methods=['POST'])
+def receive_data():
+    data = request.json
+    if not data or 'message' not in data:
+        return jsonify({"error":"No message provided"}),400
+    message = data['message']
+    result = var1.hi(message)
+    return jsonify({"message": "Data receieved", "status": "success"}),200
 
 
 if __name__ == "__main__":
-    main()
+    app.run(host='127.0.0.1', port=5000, debug=True)

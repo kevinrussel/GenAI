@@ -15,6 +15,7 @@ class RestingAi:
         ## this is how many 10 seconds there are in 25 minutes.
         self.baseline = 150
 
+        
         ## this variable keeps track of the current baseline total.
         self.baselineCounter = 0
         print("In the constructor")
@@ -30,10 +31,12 @@ class RestingAi:
 
 
     def TotalBaseLineReduction(self):
-        self.baseline = 60
+        self.baseline = 10
         self.baselineCounter = 0
         #TODO send messsage to api with a NEGATIVE VALUE TO INDICATE INTERRUPT
         self.Emotion_Array = [0,0,0,0,0,0,0]
+        print("This is where we would have an interrupt")
+        time.sleep(5)
 
 
     def ArrayEvaluation(self, index):
@@ -51,7 +54,8 @@ class RestingAi:
                 ## resetting the emotion array back to zero
                 self.Emotion_Array = [0,0,0,0,0,0,0]
                 ## since we expereience negative emotion, we are making the new baseline five minutes less
-                self.baseline = self.baseline - 30
+                self.baseline = self.baseline - 5
+                print(self.baseline)
             ## this is when it is neutral, we are going to be keeping it the same
             elif(index == 4):
                 self.baselineCounter = 0
@@ -59,14 +63,15 @@ class RestingAi:
             ## now this is the case where we have a happy situation.
             else:
                 ## we don't want to be studying more than 50 minutes at a given time.
-                if(self.baseline < 50):
+                if(self.baseline < 300):
                     self.baselineCounter= 0
-                    self.baseline = self.baseline + 30
+                    print("We have reached 150 worth of happy.")
+                    self.baseline = self.baseline + 5
                     self.Emotion_Array = [0,0,0,0,0,0,0]
         else:
             ## TODO this is the case where we return to the API with the index of the incremented value.
             
-            print("hi")
+            print(self.baselineCounter)
 
 
     def dealWithResposne(self,Emotion):
@@ -119,9 +124,9 @@ class RestingAi:
 
   
     ## TODO delete this lmao.
-    def hi(self):
-        print("hello world")
-        self.timing()
+    def hi(self, emotion):
+        self.dealWithResposne(emotion)
+        
         
 
 
