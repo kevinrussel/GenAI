@@ -41,31 +41,31 @@ const CameraCapture = () => {
   }, []);
 
   return (
-    <div className="flex flex-col items-center bg-gray-900 min-h-screen text-white py-10 relative">
-      {/* CAMERA THAT FINALLY WORKS */}
+    <div className="flex flex-col items-center bg-gray-900 min-h-screen text-white relative">
+      {/* CAMERA SECTION SMILE <3 */}
       <div
-        className={`transition-all duration-500 ease-in-out ${
-          isMenuOpen ? "w-24 h-24 absolute top-4 right-4" : "w-full"
-        }`}
-        style={{
-          top: isMenuOpen ? "auto" : "10rem",
-          transform: isMenuOpen ? "translateY(0)" : "translateY(0)",
-        }}
+        className={`transition-all duration-500 ease-in-out relative ${
+          isMenuOpen ? "h-[30vh]" : "h-full"
+        } w-full flex items-start`}
       >
-        <Webcam
-          ref={webcamRef}
-          screenshotFormat="image/jpeg"
-          className={`w-full ${
-            isMenuOpen ? "h-24" : "h-[calc(100vh-10rem)]"
-          } object-cover rounded-lg transition-all duration-500`}
-        />
+        <div
+          className={`transition-all duration-500 ease-in-out ${
+            isMenuOpen ? "w-24 h-24 absolute top-2 right-2" : "w-full h-full"
+          }`}
+        >
+          <Webcam
+            ref={webcamRef}
+            screenshotFormat="image/jpeg"
+            className="w-full h-full object-cover rounded-lg"
+          />
+        </div>
       </div>
 
-      {/* DROP DOWN MENU  */}
+      {/* DROP MENU THINGY */}
       <div
-        className={`transition-all duration-500 ${
+        className={`transition-all duration-500 w-full bg-gray-800 p-4 rounded-t-xl absolute bottom-0 left-0 ${
           isMenuOpen ? "h-[70%]" : "h-20"
-        } w-full bg-gray-800 p-4 rounded-t-xl absolute bottom-0 left-0`}
+        }`}
       >
         <button
           onClick={() => setIsMenuOpen((prev) => !prev)}
@@ -74,8 +74,8 @@ const CameraCapture = () => {
           <span>Menu</span>
           <span className="text-xl">{isMenuOpen ? "↑" : "↓"}</span>
         </button>
-        
-        {/* DROP DOWN MENU CONTENT*/}
+
+        {/* CONTENT INSIDE THE DROP MENU THINGY */}
         {isMenuOpen && (
           <div className="mt-4 text-white">
             <h2 className="text-lg font-semibold">Last Captured Images</h2>
