@@ -41,6 +41,18 @@ FACIAL_EMOTION_RECOGNITION_MODEL = load_model(
 )
 
 def predictEmotions(imagePath: str = IMAGE_PATH):
+    """
+    Predict emotions from images in the specified directory.
+
+    Args:
+        imagePath (str, optional): Path to the directory containing images. Defaults to IMAGE_PATH.
+
+    Returns:
+        dict: A dictionary with image paths as keys and predicted emotion labels as values.
+    
+    Author:
+        Kelvin Mock
+    """
     print('Predicting Images...')
     listOfImages = []
     for imageName in os.listdir(imagePath):
@@ -70,9 +82,58 @@ def predictEmotions(imagePath: str = IMAGE_PATH):
     }
     return predictions_dict
 
-
+def predictIsHuman(imagePath: str = IMAGE_PATH):
+    """
+    Predicts whether the images in the specified directory contain human faces.
+    
+    Args:
+        imagePath (str, optional): The path to the directory containing images. Defaults to IMAGE_PATH.
+        dict: A dictionary where the keys are the file paths of the images and the values are the predicted labels.
+    
+    Returns:
+        dict: A dictionary with image paths as keys and predicted human face labels as values.
+    
+    Author:
+        Kelvin Mock
+    """
+    print('Predicting Images...')
+    listOfImages = []
+    for imageName in os.listdir(imagePath):
+        fullFilepath = os.path.join(imagePath, imageName)
+        image = plt.imread(fullFilepath)
+        image = preprocess(image)
+        listOfImages.append(image)
+    listOfImages = np.array(listOfImages)
+    pred = HUMAN_FACE_DETECTION_MODEL.predict(listOfImages)
+    pred = np.argmax(pred, axis=1)  # Ensure predictions are 1D
+    print('Prediction Completed')
+    
+    # Decode the Labels with Label Encoder
+    encoder = pickle.load(open(os.path.join(
+        AI_MODEL_PATH, 
+        'dataset',
+        'aliasgartaksali',
+        'human-and-non-human',
+        'encoderTest.pkl'
+    ), 'rb'))
+    pred_items_texts: list = decode_labels(
+        encoded_labels=pred,
+        encoder=encoder
+    )
+    predictions_dict: dict = {
+        os.path.join(imagePath, imageName): pred_text for imageName, pred_text in zip(os.listdir(imagePath), pred_items_texts)
+    }
+    return predictions_dict
 
 if __name__ == '__main__':
     predictions = predictEmotions()
+    print('Facial Emotion Predictions:')
+    for image_path, prediction in predictions.items():
+        print(f"{image_path}: {prediction}")
+    
+    print('\n')
+
+    print('Human Face Detection Predictions:')
+    predictions = predictIsHuman()
     for image_path, prediction in predictions.items():
         print(f"{image_path}: {prediction}")
