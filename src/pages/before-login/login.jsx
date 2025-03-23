@@ -23,7 +23,6 @@ function SignupLogin() {
     e.preventDefault();
 
     if (isSignUp) {
-      // Sign Up logic (store in localStorage)
       if (formData.password !== formData.confirmPassword) {
         setError("Passwords do not match.");
         return;
@@ -41,7 +40,6 @@ function SignupLogin() {
       return;
     }
 
-    // Login logic (check from localStorage)
     const storedUser = JSON.parse(localStorage.getItem("user"));
 
     if (
@@ -57,7 +55,7 @@ function SignupLogin() {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-[#0D001A]">
+    <div className="flex items-center justify-center min-h-[calc(100vh-6rem)] bg-[#0D001A]">
       <div className="bg-[#1C1B2A] shadow-lg rounded-lg p-6 w-96 text-white">
         {/* Tabs */}
         <div className="flex justify-around border-b border-[#C084FC] mb-4">

@@ -17,7 +17,7 @@ export default function AboutPage() {
   };
 
   return (
-    <div className="h-[calc(100vh-4rem)] bg-[#0D001A] flex justify-center items-center px-4 py-8">
+    <div className="h-[calc(100vh-6rem)] bg-[#0D001A] flex justify-center items-center px-4 py-8">
       <div className="bg-[#12021F] p-10 rounded-xl w-full max-w-5xl shadow-lg">
   
         {/* Row 1: Title */}
