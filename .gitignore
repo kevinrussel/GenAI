@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
@@ -21,3 +22,17 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+=======
+*venv/
+.env
+*.complete
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.bmp
+*.tiff
+*.svg
+**/__pycache__/
+*.ini
+>>>>>>> bc9b11c3058d6ef5e114857e73b35b170c3339eb

@@ -1,0 +1,18 @@
+Analyze the facial expression in this image.
+Please provide a JSON object with the following fields:
+- is_human: boolean
+- emotion: string
+The scope of Emotions:
+1. Angry
+2. Fear
+3. Happy
+4. Neutral
+5. Sad
+6. Surprise
+7. Stress
+
+Examples:
+{
+  "is_human": true,
+  "emotion": "Happy"
+}
