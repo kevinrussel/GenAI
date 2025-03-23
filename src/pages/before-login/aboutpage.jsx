@@ -20,14 +20,14 @@ export default function AboutPage() {
     <div className="h-[calc(100vh-6rem)] bg-[#0D001A] flex justify-center items-center px-4 py-8">
       <div className="bg-[#12021F] p-10 rounded-xl w-full max-w-5xl shadow-lg">
   
-        {/* Row 1: Title */}
+       
         <div className="mb-10 animate-fade-in text-center">
           <h2 className="text-4xl font-extrabold text-purple-400">
             About Us
           </h2>
         </div>
   
-        {/* Row 2: Image + Text */}
+   
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center animate-fade-in-up">
           <img
             src="../../../images/study.png"

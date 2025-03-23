@@ -22,6 +22,9 @@ function SignupLogin() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    const hardcodedEmail = "testing@gmail.com";
+    const hardcodedPassword = "123";
+
     if (isSignUp) {
       if (formData.password !== formData.confirmPassword) {
         setError("Passwords do not match.");
@@ -42,7 +45,16 @@ function SignupLogin() {
 
     const storedUser = JSON.parse(localStorage.getItem("user"));
 
+    // ✅ Check hardcoded credentials first
     if (
+      formData.email === hardcodedEmail &&
+      formData.password === hardcodedPassword
+    ) {
+      setError("");
+      navigate("/startup");
+    }
+    // ✅ Then check localStorage
+    else if (
       storedUser &&
       formData.email === storedUser.email &&
       formData.password === storedUser.password
