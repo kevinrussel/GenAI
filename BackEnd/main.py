@@ -14,6 +14,8 @@ def receive_data():
     result = var1.hi(message)
     return jsonify({"message": "Data receieved", "status": "success"}),200
 
+def process_oldest_image(image_path):
+    print(f"Processing image: {image_path}")
 
 if __name__ == "__main__":
     app.run(host='127.0.0.1', port=5000, debug=True)
