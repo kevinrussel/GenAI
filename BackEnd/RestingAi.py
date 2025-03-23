@@ -113,10 +113,15 @@ class RestingAi:
         print(self.timepassed)
 
 
+
+
+
+
+  
     ## TODO delete this lmao.
-    def EvaluatePicture(self, path):
-        print("hitting")
-        print(path)
+    def hi(self, emotion):
+        self.dealWithResposne(emotion)
+        
         
 
 
