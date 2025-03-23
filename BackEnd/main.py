@@ -16,6 +16,7 @@ def receive_data():
 
 def process_oldest_image(image_path):
     print(f"Processing image: {image_path}")
+    var1.HandlePicture(image_path)
 
 if __name__ == "__main__":
     app.run(host='127.0.0.1', port=5000, debug=True)

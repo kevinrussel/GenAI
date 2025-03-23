@@ -1,5 +1,5 @@
 import time
-
+from EmotionMsg import *
 
 
 
@@ -25,13 +25,7 @@ class RestingAi:
 
 
 
-    def TotalBaseLineReduction(self):
-        self.baseline = 10
-        self.baselineCounter = 0
-        #TODO send messsage to api with a NEGATIVE VALUE TO INDICATE INTERRUPT
-        self.Emotion_Array = [0,0,0,0,0,0,0]
-        print("This is where we would have an interrupt")
-        time.sleep(5)
+
 
 
     def ArrayEvaluation(self, index):
@@ -108,7 +102,6 @@ class RestingAi:
         ## response = sendTOAI();
         ## self.DealWithResponse()
         time.sleep(10)
-
         self.timepassed = self.timepassed +1
         print(self.timepassed)
 
@@ -117,10 +110,25 @@ class RestingAi:
 
 
 
+    def DUMMYFUNC(self):
+        self.baseline = self.baseline + 40
+        print(self.baseline)
+
   
     ## TODO delete this lmao.
     def hi(self, emotion):
         self.dealWithResposne(emotion)
+
+    def HandlePicture(self,img):
+        print("hitting")
+        hi = EmotionMsg.get_emotion_advice("sad")
+        print(hi)
+        print(img)
+        self.DUMMYFUNC()
+
+        ## THIS IS WHERE WE SEND IT OFF TO THE AI
+        ## answer = AI.(picture!)
+
         
         
 
