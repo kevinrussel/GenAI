@@ -7,7 +7,6 @@ import pickle
 
 # Get the current file's directory
 CURRENT_DIR = os.path.dirname(os.path.realpath(__file__))
-print(f"Current Directory: {CURRENT_DIR}")
 
 AI_MODEL_PATH = os.path.join(
     CURRENT_DIR,
