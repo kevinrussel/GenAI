@@ -14,7 +14,7 @@ Note that we annotated the labels for the **olivetti_faces** dataset with **Goog
 **AI**
 * CNN architecture
 * Tensorflow (running on a GPU)
-* Image Processing with Python: matplotlib, openCV. Check [this code](./AI_Model/image_preprocessing.py) for more details.
+* Image Processing with Python: matplotlib, scikit-image, openCV. Check [this code](./AI_Model/image_preprocessing.py) for more details.
 
 **The MERN Stack**
 * Database - MongoDB
