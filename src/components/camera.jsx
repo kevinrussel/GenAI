@@ -12,7 +12,7 @@ const CameraCapture = () => {
       setCapturedImages((prev) => {
         const timestamp = new Date().toISOString();
         const updatedImages = [{ imageSrc, timestamp }, ...prev];
-        return updatedImages.slice(0, 9);
+        return updatedImages.slice(0, 100); // Store up to 100 images
       });
       sendImage(imageSrc);
     }
@@ -20,12 +20,18 @@ const CameraCapture = () => {
 
   const sendImage = async (image) => {
     try {
-      const response = await fetch("http://127.0.0.1:5000/upload", {  // Ensure backend is running on this URL
+      const response = await fetch("http://127.0.0.1:5000/upload", {
         method: "POST",
-        body: JSON.stringify({ image }),
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          image: image,
+          userId: "user_1",       // ✅ REQUIRED for backend
+          sessionId: "session_1", // ✅ REQUIRED for backend
+        }),
       });
-  
+
       const data = await response.json();
       console.log("Image uploaded:", data);
     } catch (error) {
@@ -36,14 +42,14 @@ const CameraCapture = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       captureImage();
-    }, 15000);
+    }, 15000); // Every 15 seconds
 
     return () => clearInterval(interval);
   }, []);
 
   return (
     <div className="flex flex-col items-center bg-gray-900 min-h-screen text-white relative">
-      {/* CAMERA SECTION SMILE <3 */}
+      {/* CAMERA SECTION */}
       <div
         className={`transition-all duration-500 ease-in-out relative ${
           isMenuOpen ? "h-[30vh]" : "h-full"
@@ -62,7 +68,7 @@ const CameraCapture = () => {
         </div>
       </div>
 
-      {/* DROP MENU THINGY */}
+      {/* DROP MENU */}
       <div
         className={`transition-all duration-500 w-full bg-gray-800 p-4 rounded-t-xl absolute bottom-0 left-0 ${
           isMenuOpen ? "h-[70%]" : "h-20"
@@ -76,17 +82,16 @@ const CameraCapture = () => {
           <span className="text-xl">{isMenuOpen ? "↓" : "↑"}</span>
         </button>
 
-        {/* CONTENT INSIDE THE DROP MENU THINGY */}
         {isMenuOpen && (
           <div className="mt-4 text-white">
-            <h2 className="text-lg font-semibold">Last Captured Images</h2>
-            <div className="grid grid-cols-3 gap-3 mt-3">
+            <h2 className="text-lg font-semibold mb-2">Last Captured Images</h2>
+            <div className="grid grid-cols-10 gap-1 px-2 max-h-[50vh] overflow-y-auto">
               {capturedImages.map((img, index) => (
                 <img
                   key={index}
-                  src={img}
+                  src={img.imageSrc}
                   alt={`Capture ${index}`}
-                  className="w-24 h-24 rounded-md border-2 border-gray-300 shadow"
+                  className="w-full aspect-square object-cover rounded-sm border border-gray-600 shadow"
                 />
               ))}
             </div>
@@ -98,3 +103,4 @@ const CameraCapture = () => {
 };
 
 export default CameraCapture;
+

@@ -5,7 +5,7 @@ from emotion_advice import get_emotion_advice  # Make sure this is importable
 
 # MongoDB setup
 client = MongoClient("mongodb://localhost:27017/")
-db = client["pomodoro_app"]
+db = client["emotionsData"]
 threshold_logs = db["threshold_logs"]
 notifications = db["notifications"]
 
