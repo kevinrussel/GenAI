@@ -1,0 +1,12 @@
+*venv/
+.env
+*.complete
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.bmp
+*.tiff
+*.svg
+**/__pycache__/
+*.ini
