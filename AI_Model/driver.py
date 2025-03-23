@@ -5,9 +5,13 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pickle
 
+# Get the current file's directory
+CURRENT_DIR = os.path.dirname(os.path.realpath(__file__))
+print(f"Current Directory: {CURRENT_DIR}")
+
 AI_MODEL_PATH = os.path.join(
-    os.path.dirname(os.path.realpath(os.curdir)),
-    'GenAI', # repo name
+    CURRENT_DIR,
+    '..',  # Move up one directory to "GenAI"
     'AI_Model'
 )
 sys.path.append(AI_MODEL_PATH)
@@ -15,8 +19,8 @@ sys.path.append(AI_MODEL_PATH)
 from image_preprocessing import preprocess, decode_labels
 
 BACKEND_PATH = os.path.join(
-    os.path.dirname(os.path.realpath(os.curdir)),
-    'GenAI', # repo name
+    CURRENT_DIR,
+    '..',  # Move up one directory
     'BackEnd'
 )
 sys.path.append(BACKEND_PATH)
